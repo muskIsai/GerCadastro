@@ -203,7 +203,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CadastreObjects.cs" />
-    <Compile Include="Models\CadastreObjectsMetadata.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\EFContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -272,6 +271,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\CadastreObjects\Index.cshtml" />
+    <Content Include="Views\CadastreObjects\Create.cshtml" />
+    <Content Include="Views\CadastreObjects\Delete.cshtml" />
+    <Content Include="Views\CadastreObjects\Details.cshtml" />
+    <Content Include="Views\CadastreObjects\Edit.cshtml" />
+    <Content Include="Views\Shared\MeuLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
