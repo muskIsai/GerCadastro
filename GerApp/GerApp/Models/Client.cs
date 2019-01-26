@@ -10,5 +10,7 @@ namespace GerApp.Models
         public int ClientID { get; set; }
         public string Nome { get; set; }
         public int Passaport { get; set; }
+        
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }
