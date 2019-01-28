@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GerApp.Models.Request>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RequestID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RequestID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RequestID })
+        </td>
+    </tr>
+}
+
+</table>

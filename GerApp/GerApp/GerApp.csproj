@@ -195,8 +195,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CadastreObjectsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,6 +272,16 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\MeuLayout.cshtml" />
+    <Content Include="Views\CadastreObjects\Create.cshtml" />
+    <Content Include="Views\CadastreObjects\Delete.cshtml" />
+    <Content Include="Views\CadastreObjects\Details.cshtml" />
+    <Content Include="Views\CadastreObjects\Edit.cshtml" />
+    <Content Include="Views\CadastreObjects\Index.cshtml" />
+    <Content Include="Views\Requests\Create.cshtml" />
+    <Content Include="Views\Requests\Delete.cshtml" />
+    <Content Include="Views\Requests\Details.cshtml" />
+    <Content Include="Views\Requests\Edit.cshtml" />
+    <Content Include="Views\Requests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

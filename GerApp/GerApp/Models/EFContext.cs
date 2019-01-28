@@ -12,5 +12,6 @@ namespace GerApp.Models
 
         public DbSet<CadastreObjects> CadastreObjects { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Request> Requests { get; set; }
     }
 }
