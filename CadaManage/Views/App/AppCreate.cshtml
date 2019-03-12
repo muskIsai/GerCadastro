@@ -1,0 +1,61 @@
+﻿@model CadaManage.Models.Application
+@{
+    ViewBag.Title = "Новая заявка";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Новая заявка</h2>
+
+    @using (Html.BeginForm("AppCreate", "App", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <input type="hidden" value="@ViewBag.User.Id" name="fk_User" />
+            <input type="hidden" value="@ViewBag.Date" name="date" />
+            <input type="hidden" value="@ViewBag.Status" name="fk_status" />
+            <input type="hidden" value="01.01.1900" name="PayModel.Validity" />
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_User, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    <div class="form-control">
+                        @ViewBag.User.surname @ViewBag.User.name @ViewBag.User.patronimic
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    <div class="form-control">
+                        @ViewBag.Date
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_typeCO, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.fk_typeCO, ViewBag.HandBookOfCOTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.fk_typeCO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_typeCW, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.fk_typeCW, ViewBag.TypeCW as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.fk_typeCW, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
+                </div>
+            </div> 
+            <div class="form-group">
+                <a href="/App/ListApp" class="btn btn-default btn-lg">&laquo; Смотреть списку заявок</a>&emsp;
+                <input type="submit" value="Отправить" class="btn btn-default btn-lg" />
+            </div>
+        </div>
+    }
+            

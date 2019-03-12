@@ -1,0 +1,71 @@
+﻿@model CadaManage.Models.Application
+@{
+    ViewBag.Title = "Изменение заявки";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Изменение заявки № @Model.Id</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <input type="hidden" value="@Model.fk_User" name="fk_User" />
+        <input type="hidden" value="@Model.date" name="date" />
+        <input type="hidden" value="@Model.fk_status" name="fk_status" />
+        <input type="hidden" value="@Model.PayModel.cartNumber" name="PayModel.cartNumber" />
+        <input type="hidden" value="@Model.PayModel.Validity" name="PayModel.Validity" />
+        <input type="hidden" value="@Model.PayModel.cartName" name="PayModel.cartName" />
+        <input type="hidden" value="@Model.PayModel.cartCod" name="PayModel.cartCod" />
+        <input type="hidden" value="@Model.cost" name="cost" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.fk_User, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @Model.User.surname @Model.User.name @Model.User.patronimic
+                </div>
+            </div>
+            </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @Model.date
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_typeCO, "Кадастровый обьект:", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.fk_typeCO, ViewBag.HandBookOfCOTypes as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.fk_typeCO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_typeCW, "Тип кадастровой работы:", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.fk_typeCW, ViewBag.TypeCW as SelectList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.fk_typeCW, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <a href="/App/ListApp" class="btn btn-default btn-lg">&laquo; Смотреть списку заявок</a>&emsp;
+                <input type="submit" value="Сохранить" class="btn btn-default btn-lg" />
+            </div>
+        </div>
+}

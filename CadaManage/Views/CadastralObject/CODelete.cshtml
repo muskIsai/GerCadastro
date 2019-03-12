@@ -1,0 +1,35 @@
+﻿@model CadaManage.Models.CadastralObject
+
+@{
+    ViewBag.Title = "Удаление Кадастрового объекта";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удаление Кадастрового объекта</h2>
+<div>
+    <h4>Вы уверены, что хотите удалить этот Кадастровый объект?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Тип</dt> 
+        <dd>@Html.DisplayFor(model => model.HandBookOfCOType.tHCOname)</dd>
+        <dt>Кадастровый номер:</dt>
+        <dd>@Html.DisplayFor(model => model.cadastralNumber)</dd>
+        <dt>Дата внесения:</dt>
+        <dd>@Html.ValueFor(model => model.dateOfEntry, "{0:dd/MM/yyyy}") </dd>
+        <dt>Правовой статус:</dt>
+        <dd>@Html.DisplayFor(model => model.LegalStatus.lsName) </dd>
+        <dt>Адрес:</dt>
+        <dd>@Html.DisplayFor(model => model.address)</dd>
+        <dt>Площадь:</dt>
+        <dd>@Html.DisplayFor(model => model.square) </dd>
+        <dt>Стоимость:</dt>
+        <dd>@Html.DisplayFor(model => model.cost) </dd>
+    </dl>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <a href="/CadastralObject/ListCO" class="btn btn-default btn-lg">&laquo; Смотреть список</a>&emsp;
+            <input type="submit" value="Удалить" class="btn btn-default btn-lg" />
+        </div>
+    }
+</div>

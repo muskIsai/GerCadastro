@@ -1,0 +1,52 @@
+﻿@model CadaManage.Models.Application
+
+@{
+    ViewBag.Title = "Оплата заявки";
+}
+
+<h2>Оплата заявки  № @Model.Id</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @{int cost = 0;}
+        @switch (Model.fk_typeCW)
+        {
+            case 1: cost = 30000; break;
+            case 2: cost = 10000; break;
+            case 3: cost = 5000; break;
+            case 4: cost = 50000; break;
+        }
+        @switch (Model.fk_typeCO)
+        {
+            case 1: cost = cost + 20000; break;
+            case 2: cost = cost + 10000; break;
+            case 4: cost = cost + 5000; break;
+            case 5: cost = cost + 50000; break;
+        }
+        <h3>Сумма к оплате: @cost₽</h3><br/>
+        <h4>Введите данные вашей карты: </h4>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PayModel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PayModel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <input type="hidden" value="@Model.fk_User" name="fk_User" />
+        <input type="hidden" value="@Model.date" name="date" />
+        <input type="hidden" value="@Model.fk_typeCO" name="fk_typeCO" />
+        <input type="hidden" value="@Model.fk_typeCW" name="fk_typeCW" />
+        <input type="hidden" value="@Model.description" name="description" />
+        <input type="hidden" value=3 name="fk_status" /> 
+        <input type="hidden" value="@cost" name="cost" />
+        <div class="form-group">
+            <a href="/App/ListApp" class="btn btn-default btn-lg">&laquo; Оплатить патом</a>&emsp;
+            <input type="submit" value="Оплатить" class="btn btn-default btn-lg" />
+        </div>
+    </div>
+}

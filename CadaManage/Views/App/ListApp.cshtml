@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CadaManage.Models.Application>
+@{
+    ViewBag.Title = "Список заявок";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h3>Заявки </h3><hr />
+    @if (ViewContext.HttpContext.User.IsInRole("Customer") || ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.IsInRole("vershin"))
+    {<a href="/App/AppCreate" class="btn btn-default btn-lg">Создать  новую заявку</a><br/><br/>}    
+    <table class="text-center table-bordered">
+        <tr>
+            <td style="width: 2%;"><p><b>№</b></p></td>
+            <td style="width: 10%;"><p><b>Заказчик</b></p></td>
+            <td style="width: 6%;"><p><b>Дата</b></p></td>
+            <td style="width: 10%;"><p><b>Кадастровый объект</b></p></td>
+            <td style="width: 10%;"><p><b>Тип кадастровой работы</b></p></td>
+            <td style="width: 6%;"><p><b>Описание</b></p></td>
+            <td style="width: 8%;"><p><b>Статус</b></p></td>
+            <td style="width: 10%;"><p><b>Оплачено, ₽</b></p></td> 
+            <td style="width: 13%;"><p><b>Опции</b></p></td>
+            @if (ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.IsInRole("vershin"))
+            { <td style="width: 13%;"><p><b>Опции</b></p></td>}
+        </tr> 
+        @foreach (var m in Model.Reverse())
+        {<tr>
+            @if (!ViewContext.HttpContext.User.IsInRole("Customer") || ViewContext.HttpContext.User.IsInRole("vershin"))
+            {   <td><p>@Html.DisplayFor(model => m.Id)</p></td>
+                <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
+                <td><p>@Html.DisplayFor(model => m.date)</p></td>
+                <td><p>@Html.DisplayFor(model => m.HandBookOfCOType.tHCOname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.TypeCW.tCWname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.description)</p></td>
+                <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
+                <td><p>@Html.DisplayFor(model => m.cost)</p></td>}
+            @if (ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Customer"))
+            {   <td><p>@Html.DisplayFor(model => m.Id)</p></td>
+                <td><p>@m.User.surname @m.User.name @m.User.patronimic</p></td>
+                <td><p>@Html.DisplayFor(model => m.date)</p></td>
+                <td><p>@Html.DisplayFor(model => m.HandBookOfCOType.tHCOname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.TypeCW.tCWname)</p></td>
+                <td><p>@Html.DisplayFor(model => m.description)</p></td>
+                <td><p>@Html.DisplayFor(model => m.Status.sName)</p></td>
+                <td><p>@Html.DisplayFor(model => m.cost)</p></td>}
+            @if ((ViewBag.User.Id == m.User.Id && ViewContext.HttpContext.User.IsInRole("Customer")) || 
+                ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.IsInRole("vershin"))
+            {<td><p><a href="/App/AppEdit/@m.Id" class="btn btn-default btn-sm">Изменить</a>
+                    <a href="/App/AppCancel/@m.Id" class="btn btn-default btn-sm">Отменить</a></p>
+                    <a href="/App/AppDelete/@m.Id" class="btn btn-default btn-sm">Удалить</a>
+                    @if (m.fk_status == 2)
+                    {<a href="/App/AppPay/@m.Id" class="btn btn-success btn-sm">Оплатить</a>}
+            </td>
+            }
+            @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
+            {<td>@if (m.fk_status == 3) 
+                {<a href="/CadastralWork/CWCreate/@m.Id" class="btn btn-default btn-sm">Принять</a>
+                <a href="/App/AppCancel/@m.Id" class="btn btn-default btn-sm">Отклонить</a>}
+            </td> 
+            }
+        </tr>
+        }
+    </table>
+</div>

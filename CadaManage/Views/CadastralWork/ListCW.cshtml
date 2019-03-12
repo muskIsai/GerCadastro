@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CadaManage.Models.CadastralWork>
+@{
+    ViewBag.Title = "ListCW";
+}
+<h2>Списк Кадастровых работы</h2>
+<table class="text-center table-bordered">
+    <tr>
+        <td style="width: 2%;"><p><b>№</b></p></td>
+        <td style="width: 10%;"><p><b>Тип кадастровый работы</b></p></td>
+        <td style="width: 10%;"><p><b>Кадастровый объект</b></p></td>
+        <td style="width: 10%;"><p><b>Заказчик</b></p></td>
+        <td style="width: 10%;"><p><b>Инженер</b></p></td>
+        <td style="width: 8%;"><p><b>Дата</b></p></td>
+        <td style="width: 6%;"><p><b>Учет</b></p></td> 
+        <td style="width: 8%;"><p><b>Стоимость</b></p></td>
+        <td style="width: 10%;"><p><b>Дополнения</b></p></td>
+        <td style="width: 14%;"><p><b>Опции</b></p></td>
+    </tr>
+
+@foreach (var m in Model.Reverse())
+{
+    <tr><td>@Html.DisplayFor(modelItem => m.Id)</td>
+        <td>@Html.DisplayFor(modelItem => m.app.TypeCW.tCWname)</td>
+        <td>@Html.DisplayFor(modelItem => m.app.HandBookOfCOType.tHCOname)</td>
+        <td>@m.app.User.surname @m.app.User.name @m.app.User.patronimic</td>
+        <td>@m.User.surname @m.User.name @m.User.patronimic</td>
+        <td>@m.app.date</td>
+        <td><a href="/CadastralWork/CWDoc/@m.Id" class="btn btn-group-sm">Документы</a></td>
+        <td>@Html.DisplayFor(modelItem => m.app.cost)</td>
+        <td>@Html.DisplayFor(modelItem => m.description)</td>
+        <td><a href="/CadastralWork/CWEdit/@m.Id" class="btn btn-default btn-sm">Изменить</a>
+        <a href="/CadastralWork/CWDelete/@m.Id" class="btn btn-default btn-sm">Удалить</a>
+        <a href="/CadastralWork/CWCancel/@m.Id" class="btn btn-default btn-sm">Отменить</a>
+        <a href="/CadastralWork/CWComplete/@m.Id" class="btn btn-default btn-sm">Завершить</a></td>
+    </tr>
+}
+</table>

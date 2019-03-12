@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кадастровое управление сorp</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        #logot{
+            text-align: center;
+            width: 78px;
+            height: 62px;
+            margin-bottom: 1px;
+        }
+    </style>
+</head>
+<body>
+        <!-- <div  class="text-center"></div> -->
+        <img id="logot" src="/Content/images/angolaa.jpg" alt="logotipo" title="Кадастривик" /><br />
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if (!ViewContext.HttpContext.User.IsInRole("Engineer"))
+                {@Html.ActionLink("Кадастровик corp", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })}
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Заявки", "ListApp", "App")</li>
+                    @if (ViewContext.HttpContext.User.IsInRole("Engineer") || ViewContext.HttpContext.User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Кадастровые работы", "ListCW", "CadastralWork")</li>}
+                    <li>@Html.ActionLink("Кадастровые объекты", "ListCO", "CadastralObject")</li>
+                    <li>@Html.ActionLink("O сайте", "myAbout", "Home")</li>
+                    <li>@Html.ActionLink("+79601932498", "", "")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <!-- <div id="header" class="text-center"><img src="/Content/images/logotipo.png" /></div> -->
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year – Кадастровик - Карлуш - isaicarl18@gmail.com</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

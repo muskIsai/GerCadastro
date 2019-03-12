@@ -1,0 +1,24 @@
+﻿@model CadaManage.Models.HandBookOfCOType
+@{
+    ViewBag.Title = "Удаление тип";
+}
+
+<h2>Удаление типа</h2>
+
+<h3>Уверены что хотите удалить это тип?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Имя: </dt>
+        <dd>@Html.DisplayFor(model => model.tHCOname) </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <a href="/COType/ShowHandBookOfCOType" class="btn btn-default btn-lg">&laquo; Смотреть Справочнику типов</a>&emsp;
+            <input type="submit" value="Удалить" class="btn btn-default btn-lg" />
+        </div>
+    }
+</div>

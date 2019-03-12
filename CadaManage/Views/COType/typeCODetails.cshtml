@@ -1,0 +1,19 @@
+﻿@model CadaManage.Models.HandBookOfCOType
+@{
+    ViewBag.Title = "Тип @Model.tHCOname";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Детали</h2>
+<div>
+    <h4>Тип @Model.tHCOname</h4>
+    <hr />        
+    @foreach (var co in Model.CadastralObjects)
+    {
+        <p> № @co.Id  Стоимость: @co.cost (Адресс: @co.address)
+        Дата: @co.dateOfEntry (Номер: @co.cadastralNumber)</p> 
+<p>
+    <a href="/COType/Edit/@Model.Id" class="btn btn-default btn-sm">>Изменять</a>&emsp;
+    <a href="/COType/ShowHandBookOfCOType" class="btn btn-default btn-sm">&laquo; Смотреть Справочку типов</a>   
+</p>
+    }
+</div>

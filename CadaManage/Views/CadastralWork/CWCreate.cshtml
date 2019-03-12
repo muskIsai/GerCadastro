@@ -1,0 +1,70 @@
+﻿@model CadaManage.Models.CadastralWork
+
+@{
+    ViewBag.Title = "Создать новый кадастров работы";
+}
+
+<h2>Создание новой кадастровой работы</h2>
+
+@using (Html.BeginForm("CWCreate", "CadastralWork", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" value="@ViewBag.App.Id" name="fk_app" />
+        <input type="hidden" value="@ViewBag.User.Id" name="fk_User" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.app.fk_typeCW, "Тип кадастровой работы", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.App.TypeCW.tCWname
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.app.fk_typeCW, "Кадастровый обьект", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.App.HandBookOfCOType.tHCOname
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.fk_User,"Заказчик", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.App.User.surname @ViewBag.App.User.name @ViewBag.App.User.patronimic
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.fk_User, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.User.surname @ViewBag.User.name @ViewBag.User.patronimic
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.app.date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.App.date
+                </div>
+            </div>
+        </div>        
+        <div class="form-group">
+            @Html.LabelFor(model => model.app.cost, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.App.cost
+                </div>
+            </div>
+        </div>
+            <div class="form-group">
+                <a href="/App/ListApp" class="btn btn-default btn-lg">&laquo; Смотреть списки заявок</a>&emsp;
+                <input type="submit" value="Создать" class="btn btn-default btn-lg" />
+            </div>
+    </div>
+}

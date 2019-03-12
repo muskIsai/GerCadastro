@@ -1,0 +1,76 @@
+﻿@model CadaManage.Models.CadastralObject
+
+@{
+    ViewBag.Title = "Создание кадастрового объекта";
+}
+
+<h2>Создание кадастрового объекта</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" value="@ViewBag.CadastralWork.app.fk_typeCO" name="fk_typeCO" />
+        <input type="hidden" value="@ViewBag.Date" name="dateOfEntry" />
+        <input type="hidden" value="@ViewBag.CadastralWork.app.cost" name="cost" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.fk_typeCO, "Тип объекта", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class ="form-control">
+                    @ViewBag.CadastralWork.app.HandBookOfCOType.tHCOname
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.cadastralNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cadastralNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cadastralNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.dateOfEntry,"Дата постановки на учет", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.Date
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.fk_legalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.fk_legalStatus, ViewBag.LegalStatus as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.fk_legalStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.square, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.square, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.square, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.cost, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-3">
+                <div class="form-control">
+                    @ViewBag.CadastralWork.app.cost
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <a href="/CadastralWork/ListCW" class="btn btn-default btn-lg">&laquo; Смотреть списк Кадастровыx работ</a>&emsp;
+            <input type="submit" value="Добавить" class="btn btn-default btn-lg" />
+        </div>
+    </div>
+}

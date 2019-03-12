@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CadaManage.Models.HandBookOfCOType>
+@{
+    ViewBag.Title = "Справочник тип кадастровый обьектов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<body>
+    <div>
+        <h2>Справить тип кадастровый объектов</h2><hr />
+        <table class="text-center table-bordered">
+            <tr>
+                <td style="width: 50px;"><p><b>№</b></p></td>
+                <td style="width: 200px;"><p><b>Тип</b></p></td>
+                @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
+                {<td style="width: 250px;"><p><b>Oпции</b></p></td>}
+            </tr>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td><p>@Html.DisplayFor(model => m.Id)</p></td>
+                    <td><p>@Html.DisplayFor(model => m.tHCOname)</p></td>
+                    @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
+                    {<td><a href="/COType/typeCODetails/@m.Id" class="btn btn-info btn-sm">Детали</a>&emsp;
+                     <a href="/COType/Edit/@m.Id"class="btn btn-primary btn-sm">Изменить</a> 
+                     <a href="/COType/Delete/@m.Id" class="btn btn-danger btn-sm">Удалить</a></td> }
+                </tr>
+            }
+        </table>
+        <br />
+        @if (!ViewContext.HttpContext.User.IsInRole("Customer"))
+        {<a href="/COType/Create" class="btn btn-default btn-lg">Создать новый тип кадастрового объекта</a>} &emsp;
+        <a href="/CadastralObject/ListCO" class="btn btn-default btn-lg">&laquo; Смотреть списк Кадастровыx объектов</a>
+    </div>
+</body>
+</html>
